@@ -1,3 +1,5 @@
+module Check where
+
 import Control.Applicative ( (<$), (<$>) )
 import Data.Map as Map  
 import Control.Monad ( guard )
@@ -22,15 +24,6 @@ data Type = TVar Symb
 
 -- Упаковка контекста (синоним).
 type Env = Map Symb Type
-
--- Удобства для будущих тестов.
-(--->) :: Integer -> Integer -> Type 
-a ---> b = TVar (show a) :-> TVar (show b)
-infixr 3 --->
-
-(@@) :: Symb -> Symb -> Expr
-a @@ b = Var a :@ Var b
-infixl 4 @@
 
 -- Выведение типов (потом будем в check поданный тип сравнивать с выведенным).
 eval :: Env -> Expr -> Maybe Type
